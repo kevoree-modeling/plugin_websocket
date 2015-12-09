@@ -1,4 +1,4 @@
-///<reference path='../../../target/jsdeps/org.kevoree.modeling.microframework.browser.d.ts'/>
+///<reference path='../../../target/jsdeps/microframework.browser.d.ts'/>
 var org;
 (function (org) {
     var kevoree;
@@ -176,4 +176,4 @@ var org;
         })(modeling = kevoree.modeling || (kevoree.modeling = {}));
     })(kevoree = org.kevoree || (org.kevoree = {}));
 })(org || (org = {}));
-//# sourceMappingURL=org.kevoree.modeling.drivers.websocket.js.map
+//# sourceMappingURL=drivers.websocket.js.map

@@ -2,7 +2,7 @@ var fs = require('fs');
 
 // file is included here:
 eval(fs.readFileSync(__dirname + '/../jsdeps/microframework.browser.js') + '');
-eval(fs.readFileSync(__dirname + '/../classes/org.kevoree.modeling.drivers.websocket.js') + '');
+eval(fs.readFileSync(__dirname + '/../classes/drivers.websocket.js') + '');
 
 var dynamicMM = new org.kevoree.modeling.meta.impl.MetaModel("mock");
 var dynamicSensorClass = dynamicMM.addMetaClass("sensor");
