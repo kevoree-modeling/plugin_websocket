@@ -176,4 +176,4 @@ var org;
         })(modeling = kevoree.modeling || (kevoree.modeling = {}));
     })(kevoree = org.kevoree || (org.kevoree = {}));
 })(org || (org = {}));
-//# sourceMappingURL=drivers.websocket.js.map
+//# sourceMappingURL=plugin.websocket.js.map
