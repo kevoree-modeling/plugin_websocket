@@ -27,6 +27,19 @@ Simply add the following dependency to your maven project:
 </dependency>
 ```
 
+## Gateway usage (Java only)
+
+First, man has to instantiate another storage using a plugin such as levelDB.
+Considering the name of this storage **localStorage***, the following code snippet expose this storage on a WebSocket port 8080.
+Please change the port according to your need.
+
+```java
+import org.kevoree.modeling.plugin.WebSocketGateway;
+
+WebSocketGateway.expose(localStorage, 8080).start();
+```
+
+
 ## Usage
 
 The LevelDBPlugin is the main entry point for this plugin.
