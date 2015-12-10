@@ -1,10 +1,10 @@
 # KMF Storage Plugin: Websocket Client & Server
 
 This project contains two KMF Plugins:
-- **WebSocketGateway**: is implemented and acts as a server to another KMF Storage plugin such as LevelDB or RocksDB.
+- **WebSocketGateway**: acts as a server to another KMF Storage plugin such as LevelDB or RocksDB.
 In a nutshell, this plugin allows to open a remote access on any storage through a bi-bidirectional WebSocket persistent connection.
-- **WebSocketClientPlugin**: plugin is also implemented, allowing to configure a model to load its elements through a WebSocket connection.
-The assembly of both plugin allow to seamlessly work on a remote storage as a local one.
+- **WebSocketClientPlugin**: allows to configure a model to load its elements through a WebSocket connection, and therefore through a gateway (client/server architecture).
+The assembly of both plugins allows to seamlessly work on a remote storage as a local one.
 Additionally the WebSocket Client plugin is delivered for Java and JavaScript platform, both embedded in the same Jar dependency.
 
 ## Last versions:
