@@ -1,4 +1,4 @@
-package org.kevoree.modeling.drivers.websocket;
+package org.kevoree.modeling.plugin;
 
 import io.undertow.connector.ByteBufferPool;
 import io.undertow.server.DefaultByteBufferPool;
@@ -24,7 +24,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.IntUnaryOperator;
 
-public class WebSocketPeer extends AbstractReceiveListener implements KContentDeliveryDriver {
+public class WebSocketClientPlugin extends AbstractReceiveListener implements KContentDeliveryDriver {
 
     private static final int CALLBACK_SIZE = 1000000;
 
@@ -34,7 +34,7 @@ public class WebSocketPeer extends AbstractReceiveListener implements KContentDe
 
     private final ArrayLongMap<KCallback> _callbacks = new ArrayLongMap<KCallback>(KConfig.CACHE_INIT_SIZE, KConfig.CACHE_LOAD_FACTOR);
 
-    public WebSocketPeer(String url) {
+    public WebSocketClientPlugin(String url) {
         _client = new UndertowWSClient(url);
     }
 

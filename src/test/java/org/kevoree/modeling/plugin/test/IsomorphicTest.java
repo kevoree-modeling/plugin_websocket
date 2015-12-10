@@ -1,4 +1,4 @@
-package org.kevoree.modeling.drivers.websocket.test;
+package org.kevoree.modeling.plugin.test;
 
 
 import de.flapdoodle.embed.nodejs.*;
@@ -11,8 +11,8 @@ import org.kevoree.modeling.KObject;
 import org.kevoree.modeling.KOperation;
 import org.kevoree.modeling.cdn.KContentDeliveryDriver;
 import org.kevoree.modeling.cdn.impl.MemoryContentDeliveryDriver;
-import org.kevoree.modeling.drivers.websocket.WebSocketPeer;
-import org.kevoree.modeling.drivers.websocket.gateway.WebSocketGateway;
+import org.kevoree.modeling.plugin.WebSocketClientPlugin;
+import org.kevoree.modeling.plugin.WebSocketGateway;
 import org.kevoree.modeling.memory.manager.DataManagerBuilder;
 import org.kevoree.modeling.meta.KMetaClass;
 import org.kevoree.modeling.meta.KMetaModel;
@@ -43,7 +43,7 @@ public class IsomorphicTest {
         dynamicSensorClass.addAttribute("name", KPrimitiveTypes.STRING);
         dynamicSensorClass.addAttribute("value", KPrimitiveTypes.CONTINUOUS);
 
-        KModel model = dynamicMM.createModel(DataManagerBuilder.create().withContentDeliveryDriver(new WebSocketPeer("ws://localhost:" + PORT + "/testRoomId?peerId=javapeer")).build());
+        KModel model = dynamicMM.createModel(DataManagerBuilder.create().withContentDeliveryDriver(new WebSocketClientPlugin("ws://localhost:" + PORT + "/testRoomId?peerId=javapeer")).build());
         KMetaOperation operationTrigger = dynamicSensorClass.addOperation("trigger");
         operationTrigger.setReturnType(KPrimitiveTypes.STRING, false);
         operationTrigger.addParam(KPrimitiveTypes.STRING, false);

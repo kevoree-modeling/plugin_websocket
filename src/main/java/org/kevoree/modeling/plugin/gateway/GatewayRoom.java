@@ -1,4 +1,4 @@
-package org.kevoree.modeling.drivers.websocket.gateway;
+package org.kevoree.modeling.plugin.gateway;
 
 import io.undertow.websockets.core.*;
 import org.kevoree.modeling.KCallback;

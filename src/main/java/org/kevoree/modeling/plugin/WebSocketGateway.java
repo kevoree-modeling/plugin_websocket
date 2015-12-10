@@ -1,4 +1,4 @@
-package org.kevoree.modeling.drivers.websocket.gateway;
+package org.kevoree.modeling.plugin;
 
 import io.undertow.Handlers;
 import io.undertow.Undertow;
@@ -17,6 +17,7 @@ import org.kevoree.modeling.memory.chunk.KIntMapCallBack;
 import org.kevoree.modeling.memory.chunk.impl.ArrayIntMap;
 import org.kevoree.modeling.message.*;
 import org.kevoree.modeling.message.impl.*;
+import org.kevoree.modeling.plugin.gateway.GatewayRoom;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package org.kevoree.modeling.drivers.websocket.test;
+package org.kevoree.modeling.plugin.test;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,16 +8,14 @@ import org.kevoree.modeling.KObject;
 import org.kevoree.modeling.KOperation;
 import org.kevoree.modeling.cdn.KContentDeliveryDriver;
 import org.kevoree.modeling.cdn.impl.MemoryContentDeliveryDriver;
-import org.kevoree.modeling.drivers.websocket.WebSocketPeer;
-import org.kevoree.modeling.drivers.websocket.gateway.WebSocketGateway;
+import org.kevoree.modeling.plugin.WebSocketClientPlugin;
+import org.kevoree.modeling.plugin.WebSocketGateway;
 import org.kevoree.modeling.memory.manager.DataManagerBuilder;
 import org.kevoree.modeling.meta.KMetaClass;
 import org.kevoree.modeling.meta.KMetaModel;
 import org.kevoree.modeling.meta.KMetaOperation;
 import org.kevoree.modeling.meta.KPrimitiveTypes;
 import org.kevoree.modeling.meta.impl.MetaModel;
-import org.kevoree.modeling.operation.KOperationManager;
-import org.kevoree.modeling.operation.KOperationStrategy;
 import org.kevoree.modeling.operation.OperationStrategies;
 
 import java.util.concurrent.CountDownLatch;
@@ -50,7 +48,7 @@ public class WebSocketPeerlTest {
         operationTriggerArray.setReturnType(KPrimitiveTypes.STRING, true);
         operationTriggerArray.addParam(KPrimitiveTypes.STRING, true);
 
-        KModel model = dynamicMM.createModel(DataManagerBuilder.create().withContentDeliveryDriver(new WebSocketPeer("ws://localhost:" + PORT + "/testRoomId")).build());
+        KModel model = dynamicMM.createModel(DataManagerBuilder.create().withContentDeliveryDriver(new WebSocketClientPlugin("ws://localhost:" + PORT + "/testRoomId")).build());
 
         model.setOperation(operationTrigger, new KOperation() {
             @Override
@@ -102,7 +100,7 @@ public class WebSocketPeerlTest {
                     public void on(Object o) {
 
                         //Start a second model on this webSocket
-                        KModel model2 = dynamicMM.createModel(DataManagerBuilder.create().withContentDeliveryDriver(new WebSocketPeer("ws://localhost:" + PORT + "/testRoomId")).build());
+                        KModel model2 = dynamicMM.createModel(DataManagerBuilder.create().withContentDeliveryDriver(new WebSocketClientPlugin("ws://localhost:" + PORT + "/testRoomId")).build());
                         model2.connect(new KCallback() {
                             @Override
                             public void on(Object o) {
