@@ -39,24 +39,14 @@ import org.kevoree.modeling.plugin.WebSocketGateway;
 WebSocketGateway.expose(localStorage, 8080).start();
 ```
 
+## WebSocketClientPlugin usage (Java)
 
-## Usage
 
-The LevelDBPlugin is the main entry point for this plugin.
-Simply reference the full qualified name of the storage (should be an existant directory).
+## WebSocketClientPlugin usage (JS)
 
-```java
-import org.kevoree.modeling.cdn.KContentDeliveryDriver;
-import org.kevoree.modeling.plugin.LevelDBPlugin;
 
-KContentDeliveryDriver levelDBDriver = 
-	new LevelDBPlugin("/opt/kmf_storage");
-model = new MyModel(
-    DataManagerBuilder.create()
-    .withContentDeliveryDriver(levelDBDriver)
-    .build()
-    );
-```
+
+## More info
 
 To have more information about KMF distributed model usage, please visit the following tutorial step:
 
