@@ -41,13 +41,53 @@ WebSocketGateway.expose(localStorage, 8080).start();
 
 ## WebSocketClientPlugin usage (Java)
 
+The WebSocketClientPlugin should be instantiate on client side and configure as the CDN driver for a KMF model such as:
+
+```java
+import org.kevoree.modeling.plugin.WebSocketClientPlugin;
+
+WebSocketClientPlugin wsclient = new WebSocketClientPlugin("ws://localhost:" + PORT + "/yourRoom")
+
+KModel model = dynamicMM.createModel(
+        DataManagerBuilder
+        .create()
+        .withContentDeliveryDriver(wsclient)
+        .build()
+    );
+```
+
+This code use the generic reflexive model of KMF, please refer to the documentation to instantiate using your generate MetaModel.
+In addition, please not that you should replace localhost by the IP of the corresponding gateway, as well as the PORT.
+Finally the yourRoom correspond to your sharing zone.
+In other words, clients was be isolated each others by using different roomID, in case of a shared model conversely the same room should be used.
 
 ## WebSocketClientPlugin usage (JS)
 
+The JavaScript version of WebSocketClientPlugin is feature similar to the Java version.
+First the plugin js file should be included in your browser script, such as:
 
+```html
+<script src="plugin.websocket.js"></script>
+```
+
+Then in your JS code, just instantiate the client:
+
+```js
+var wsClient = new org.kevoree.modeling.plugin.WebSocketClientPlugin("ws://localhost:6000/yourRoom");
+```
+
+and use it to instanciate the model similarly to the Java version.
+
+```js
+var model = dynamicMM.createModel(org.kevoree.modeling.memory.manager.DataManagerBuilder.create().withContentDeliveryDriver(wsClient).build());
+```
 
 ## More info
 
 To have more information about KMF distributed model usage, please visit the following tutorial step:
 
 https://github.com/kevoree-modeling/tutorial/tree/master/step6_distribution
+
+if you want to have more information about the JS/Java usage of KMF please visit the following tutorial step:
+
+https://github.com/kevoree-modeling/tutorial/tree/master/step7_isomorphism
