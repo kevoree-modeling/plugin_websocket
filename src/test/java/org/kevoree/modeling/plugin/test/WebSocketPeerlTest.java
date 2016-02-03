@@ -137,18 +137,13 @@ public class WebSocketPeerlTest {
                 });
             }
         });
-
-
         try {
             latch.await(4000, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         Assert.assertEquals(latch.getCount(), 0);
-
         gateway.stop();
-
     }
 
 }

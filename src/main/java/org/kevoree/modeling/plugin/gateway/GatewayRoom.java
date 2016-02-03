@@ -36,6 +36,16 @@ public class GatewayRoom extends AbstractReceiveListener {
         return this._name;
     }
 
+    public void sendToPeers(String payload) {
+        _peerId_to_channel.each(new KStringMapCallBack<WebSocketChannel>() {
+            @Override
+            public void on(String s, WebSocketChannel webSocketChannel) {
+                WebSockets.sendText(payload, webSocketChannel, null);
+            }
+        });
+    }
+
+
     @Override
     protected void onFullTextMessage(WebSocketChannel channel, BufferedTextMessage message) throws IOException {
         onMessage(channel, message.getData());
