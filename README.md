@@ -9,7 +9,7 @@ Additionally the WebSocket Client plugin is delivered for Java and JavaScript pl
 
 ## Last versions:
 
-- 4.27.0 compatible with KMF framework 4.27.x
+- 4.27.2 compatible with KMF framework 4.27.x
 
 ## Changelog
 
