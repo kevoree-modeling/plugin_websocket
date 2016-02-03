@@ -28,7 +28,6 @@ import java.util.function.IntUnaryOperator;
 public class WebSocketGateway implements WebSocketConnectionCallback, HttpHandler {
 
     private KContentDeliveryDriver wrapped = null;
-    private ArrayIntMap<WebSocketChannel> _connectedChannels_hash = new ArrayIntMap<WebSocketChannel>(KConfig.CACHE_INIT_SIZE, KConfig.CACHE_LOAD_FACTOR);
     private Undertow _server = null;
     private int _port = 8080;
     private int interceptorId = -1;
@@ -64,12 +63,9 @@ public class WebSocketGateway implements WebSocketConnectionCallback, HttpHandle
                 message.setType(Message.EVENTS_TYPE);
                 message.setKeys(updatedKeys);
                 String payload = message.save();
-                _connectedChannels_hash.each(new KIntMapCallBack<WebSocketChannel>() {
-                    @Override
-                    public void on(int key, WebSocketChannel channel) {
-                        WebSockets.sendText(payload, channel, null);
-                    }
-                });
+                for(GatewayRoom room : _rooms.values()) {
+                    room.sendToPeers(payload);
+                }
             }
 
             @Override
