@@ -63,7 +63,7 @@ public class WebSocketGateway implements WebSocketConnectionCallback, HttpHandle
                 message.setType(Message.EVENTS_TYPE);
                 message.setKeys(updatedKeys);
                 String payload = message.save();
-                for(GatewayRoom room : _rooms.values()) {
+                for (GatewayRoom room : _rooms.values()) {
                     room.sendToPeers(payload);
                 }
             }
@@ -90,12 +90,7 @@ public class WebSocketGateway implements WebSocketConnectionCallback, HttpHandle
         }
         String roomId = rawURI.substring(1, rawURI.length() - querySize);
         if (roomId.length() == 0) {
-            webSocketChannel.setCloseReason("RoomID should be defined!");
-            try {
-                webSocketChannel.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            roomId = "default";
         }
         GatewayRoom resolvedRoom = _rooms.get(roomId);
         if (resolvedRoom == null) {
