@@ -14,6 +14,8 @@ Additionally the WebSocket Client plugin is delivered for Java and JavaScript pl
 ## Changelog
 
 - 4.27.0 use Undertow in version 1.3.6
+- 4.27.1 minor bug fix for events propagation
+- 4.27.2 roomID are now optional (empty roomID will now be replaced by default)
 
 ## Dependency
 
@@ -59,6 +61,7 @@ KModel model = dynamicMM.createModel(
 This code use the generic reflexive model of KMF, please refer to the documentation to instantiate using your generate MetaModel.
 In addition, please not that you should replace localhost by the IP of the corresponding gateway, as well as the PORT.
 Finally the yourRoom correspond to your sharing zone.
+RoomID is optional and will be replaced by default in case of empty.
 In other words, clients was be isolated each others by using different roomID, in case of a shared model conversely the same room should be used.
 
 ## WebSocketClientPlugin usage (JS)
