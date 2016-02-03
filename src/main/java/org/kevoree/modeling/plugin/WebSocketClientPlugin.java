@@ -16,6 +16,7 @@ import org.kevoree.modeling.memory.chunk.impl.ArrayIntMap;
 import org.kevoree.modeling.memory.chunk.impl.ArrayLongMap;
 import org.kevoree.modeling.message.KMessage;
 import org.kevoree.modeling.message.impl.Message;
+import org.kevoree.modeling.plugin.lru.LRUKeys;
 import org.xnio.*;
 
 import java.io.IOException;
@@ -27,6 +28,7 @@ import java.util.function.IntUnaryOperator;
 public class WebSocketClientPlugin extends AbstractReceiveListener implements KContentDeliveryDriver {
 
     private static final int CALLBACK_SIZE = 1000000;
+    private static final int DEFAULT_CACHE_SIZE = 10000;//no specific reason, could(should?) be modified
 
     private UndertowWSClient _client;
 
@@ -34,8 +36,15 @@ public class WebSocketClientPlugin extends AbstractReceiveListener implements KC
 
     private final ArrayLongMap<KCallback> _callbacks = new ArrayLongMap<KCallback>(KConfig.CACHE_INIT_SIZE, KConfig.CACHE_LOAD_FACTOR);
 
-    public WebSocketClientPlugin(String url) {
+    private LRUKeys _cache;
+
+    public WebSocketClientPlugin(String url,int cacheCapacity) {
         _client = new UndertowWSClient(url);
+        _cache = new LRUKeys(cacheCapacity);
+    }
+
+    public WebSocketClientPlugin(String url) {
+        this(url,DEFAULT_CACHE_SIZE);
     }
 
     @Override
@@ -138,16 +147,22 @@ public class WebSocketClientPlugin extends AbstractReceiveListener implements KC
 
     @Override
     public void get(long[] keys, KCallback<String[]> callback) {
-        KMessage getRequest = new Message();
-        getRequest.setType(Message.GET_REQ_TYPE);
-        getRequest.setKeys(keys);
-        getRequest.setID(nextKey());
-        _callbacks.put(getRequest.id(), callback);
-        WebSockets.sendText(getRequest.save(), _client.getChannel(), null);
+        String[] result = _cache.get(keys);
+        if(result == null) {//data does not in the cache
+            KMessage getRequest = new Message();
+            getRequest.setType(Message.GET_REQ_TYPE);
+            getRequest.setKeys(keys);
+            getRequest.setID(nextKey());
+            _callbacks.put(getRequest.id(), callback);
+            WebSockets.sendText(getRequest.save(), _client.getChannel(), null);
+        } else {
+            callback.on(result);
+        }
     }
 
     @Override
     public synchronized void put(long[] p_keys, String[] p_values, KCallback<Throwable> p_callback, int excludeListener) {
+        _cache.put(p_keys,p_values);
         KMessage putRequest = new Message();
         putRequest.setType(Message.PUT_REQ_TYPE);
         putRequest.setKeys(p_keys);
@@ -169,7 +184,7 @@ public class WebSocketClientPlugin extends AbstractReceiveListener implements KC
 
     @Override
     public void remove(long[] keys, KCallback<Throwable> error) {
-        //TODO
+        //TODO delete? never used
     }
 
     private ArrayIntMap<KContentUpdateListener> additionalInterceptors = null;
