@@ -4,7 +4,7 @@
 
     <groupId>org.kevoree.modeling.plugin</groupId>
     <artifactId>websocket</artifactId>
-    <version>4.27.2</version>
+    <version>4.27.3-SNAPSHOT</version>
     <name>KMF :: Plugin :: WebSocket</name>
 
     <properties>
