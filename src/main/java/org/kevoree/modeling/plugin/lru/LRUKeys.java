@@ -2,8 +2,8 @@ package org.kevoree.modeling.plugin.lru;
 
 import org.kevoree.modeling.KConfig;
 import org.kevoree.modeling.KContentKey;
-import org.kevoree.modeling.memory.chunk.KStringMap;
-import org.kevoree.modeling.memory.chunk.impl.ArrayStringMap;
+import org.kevoree.modeling.plugin.util.ArrayStringIntMap;
+import org.kevoree.modeling.plugin.util.KStringIntMap;
 
 /**
  * Created by ludovicmouline on 01/02/16.
@@ -18,7 +18,7 @@ public class LRUKeys {
     private int[] _prev; //indexes of previous element, _prev[i] : the previous (i.e younger _value) of _cache[i]
     private int _head;
 
-    private KStringMap<Integer> _indexes;
+    private KStringIntMap _indexes;
 
     public LRUKeys(int capacity) {
         _capacity = capacity;
@@ -31,13 +31,13 @@ public class LRUKeys {
             _prev[i] = ((i - 1) % _capacity + _capacity) % _capacity;
         }
 
-        _indexes = new ArrayStringMap<>(capacity, KConfig.CACHE_LOAD_FACTOR);
+        _indexes = new ArrayStringIntMap(capacity, KConfig.CACHE_LOAD_FACTOR);
     }
 
-    private int containKey(String key) {
-        Integer index = _indexes.get(key);
-        return (index == null)? -1 : index;
-    }
+    /*private int containKey(String key) {
+        *//*Integer index = _indexes.get(key);
+        return (index == null)? -1 : index;*//*
+    }*/
 
     /**
      *
@@ -56,7 +56,7 @@ public class LRUKeys {
        int nbKChunk = keys.length / 3;
        for(int i=0;i<nbKChunk;i++) {
            String concatKey = KContentKey.toString(keys,i);
-           int indexValue = containKey(concatKey);
+           int indexValue = _indexes.get(concatKey);//containKey(concatKey);
            if(indexValue == -1){//insert new value
                _indexes.remove(concatKey);
                _cache[_head] = values[i];
@@ -90,7 +90,7 @@ public class LRUKeys {
         String[] toReturn = null;
         for(int i=0;i<nbKChunkKey;i++) {
             String concatKey = KContentKey.toString(keys,i);
-            int indexValue = containKey(concatKey);
+            int indexValue = _indexes.get(concatKey);//containKey(concatKey);
             if(indexValue != -1){
                 if(indexValue != _head) {
                     _next[_prev[indexValue]] = _next[indexValue];
