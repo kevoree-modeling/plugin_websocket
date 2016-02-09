@@ -6,17 +6,6 @@ package org.kevoree.modeling.plugin.util;
  * So, Array3LongIntMap.get(<key>) == -1 means "no value for key <key>"
  */
 
-/**
- * @native ts
- * constructor(initalCapacity: number, loadFactor : number) { }
- * public clear():void { for(var p in this){ if(this.hasOwnProperty(p)){ delete this[p];} } }
- * public get(key:string):V { return this[key]; }
- * public put(key:string, pval : V):V { var previousVal = this[key];this[key] = pval;return previousVal;}
- * public contains(key:string):boolean { return this.hasOwnProperty(key);}
- * public remove(key:string):V { var tmp = this[key]; delete this[key]; return tmp; }
- * public size():number { return Object.keys(this).length; }
- * public each(callback: (p : string, p1 : V) => void): void { for(var p in this){ if(this.hasOwnProperty(p)){ callback(<string>p,this[p]); } } }
- */
 public class Array3LongIntMap implements K3LongIntMap {
 
     protected int elementCount;
@@ -32,9 +21,7 @@ public class Array3LongIntMap implements K3LongIntMap {
 
     private HeadEntry[] heads;
 
-    /**
-     * @ignore ts
-     */
+
     static final class Entry {
         Entry next; //linked list to mock the bucket
 
@@ -53,13 +40,12 @@ public class Array3LongIntMap implements K3LongIntMap {
         }
     }
 
-    /**
-     *
-     * @ignore ts
-     */
+
     private static final class HeadEntry {
         long uuid;
-        String key;
+
+        long universe;
+        long time;
 
     }
 
