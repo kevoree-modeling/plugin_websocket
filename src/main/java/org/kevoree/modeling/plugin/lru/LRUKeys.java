@@ -1,9 +1,8 @@
 package org.kevoree.modeling.plugin.lru;
 
 import org.kevoree.modeling.KConfig;
-import org.kevoree.modeling.KContentKey;
-import org.kevoree.modeling.plugin.util.ArrayStringIntMap;
-import org.kevoree.modeling.plugin.util.KStringIntMap;
+import org.kevoree.modeling.plugin.util.Array3LongIntMap;
+import org.kevoree.modeling.plugin.util.K3LongIntMap;
 
 /**
  * Created by ludovicmouline on 01/02/16.
@@ -18,7 +17,7 @@ public class LRUKeys {
     private int[] _prev; //indexes of previous element, _prev[i] : the previous (i.e younger _value) of _cache[i]
     private int _head;
 
-    private KStringIntMap _indexes;
+    private K3LongIntMap _indexes;
 
     public LRUKeys(int capacity) {
         _capacity = capacity;
@@ -31,7 +30,7 @@ public class LRUKeys {
             _prev[i] = ((i - 1) % _capacity + _capacity) % _capacity;
         }
 
-        _indexes = new ArrayStringIntMap(capacity, KConfig.CACHE_LOAD_FACTOR);
+        _indexes = new Array3LongIntMap(capacity, KConfig.CACHE_LOAD_FACTOR);
     }
 
     /*private int containKey(String key) {
@@ -55,12 +54,13 @@ public class LRUKeys {
    public void put(long[] keys, String[] values) {
        int nbKChunk = keys.length / 3;
        for(int i=0;i<nbKChunk;i++) {
-           String concatKey = KContentKey.toString(keys,i);
-           int indexValue = _indexes.get(concatKey);//containKey(concatKey);
+
+//           String concatKey = KContentKey.toString(keys,i);
+           int indexValue = _indexes.get(keys[i],keys[i+1],keys[i+2]);//containKey(concatKey);
            if(indexValue == -1){//insert new value
-               _indexes.remove(concatKey);
+               _indexes.remove(keys[i],keys[i+1],keys[i+2]);
                _cache[_head] = values[i];
-               _indexes.put(concatKey,_head);
+               _indexes.put(keys[i],keys[i+1],keys[i+2],_head);
                _head = _next[_head];
            } else if(indexValue == _head) {//insert value that already exist and the head pointer is on this value
                _head = _next[_head];
@@ -89,8 +89,8 @@ public class LRUKeys {
         int nbKChunkKey = keys.length / 3;
         String[] toReturn = null;
         for(int i=0;i<nbKChunkKey;i++) {
-            String concatKey = KContentKey.toString(keys,i);
-            int indexValue = _indexes.get(concatKey);//containKey(concatKey);
+//            String concatKey = KContentKey.toString(keys,i);
+            int indexValue = _indexes.get(keys[i],keys[i+1],keys[i+2]);//containKey(concatKey);
             if(indexValue != -1){
                 if(indexValue != _head) {
                     _next[_prev[indexValue]] = _next[indexValue];
