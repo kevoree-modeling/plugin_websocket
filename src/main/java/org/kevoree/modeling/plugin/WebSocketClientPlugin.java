@@ -16,7 +16,8 @@ import org.kevoree.modeling.memory.chunk.impl.ArrayIntMap;
 import org.kevoree.modeling.memory.chunk.impl.ArrayLongMap;
 import org.kevoree.modeling.message.KMessage;
 import org.kevoree.modeling.message.impl.Message;
-import org.kevoree.modeling.plugin.lru.LRUKeys;
+import org.kevoree.modeling.plugin.lru.LRUCache;
+import org.kevoree.modeling.plugin.lru.impl.LRUKeys;
 import org.xnio.*;
 
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class WebSocketClientPlugin extends AbstractReceiveListener implements KC
 
     private final ArrayLongMap<KCallback> _callbacks = new ArrayLongMap<KCallback>(KConfig.CACHE_INIT_SIZE, KConfig.CACHE_LOAD_FACTOR);
 
-    private LRUKeys _cache;
+    private LRUCache _cache;
 
     public WebSocketClientPlugin(String url,int cacheCapacity) {
         _client = new UndertowWSClient(url);

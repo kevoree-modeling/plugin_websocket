@@ -6,10 +6,6 @@ package org.kevoree.modeling.plugin.util;
 public interface K3LongIntMap {
     boolean contains(long universe, long time, long uuid);
 
-   /* int get(String key);
-
-    void put(String key, int value);*/
-
     int get(long universe, long time, long uuid);
 
     void put(long universe, long time, long uuid, int value);

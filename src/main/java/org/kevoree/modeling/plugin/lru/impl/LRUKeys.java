@@ -1,13 +1,16 @@
-package org.kevoree.modeling.plugin.lru;
+package org.kevoree.modeling.plugin.lru.impl;
 
 import org.kevoree.modeling.KConfig;
+import org.kevoree.modeling.plugin.lru.LRUCache;
 import org.kevoree.modeling.plugin.util.Array3LongIntMap;
 import org.kevoree.modeling.plugin.util.K3LongIntMap;
+
+import java.util.Arrays;
 
 /**
  * Created by ludovicmouline on 01/02/16.
  */
-public class LRUKeys {
+public class LRUKeys implements LRUCache {
 
     private int _capacity;
 
@@ -51,6 +54,7 @@ public class LRUKeys {
      *      values: KObject serialized
      *
      */
+   @Override
    public void put(long[] keys, String[] values) {
        int nbKChunk = keys.length / 3;
        for(int i=0;i<nbKChunk;i++) {
@@ -58,7 +62,8 @@ public class LRUKeys {
 //           String concatKey = KContentKey.toString(keys,i);
            int indexValue = _indexes.get(keys[i],keys[i+1],keys[i+2]);//containKey(concatKey);
            if(indexValue == -1){//insert new value
-               _indexes.remove(keys[i],keys[i+1],keys[i+2]);
+               //_indexes.remove(keys[i],keys[i+1],keys[i+2]);
+
                _cache[_head] = values[i];
                _indexes.put(keys[i],keys[i+1],keys[i+2],_head);
                _head = _next[_head];
@@ -85,6 +90,7 @@ public class LRUKeys {
      *      keys[3i+ 2] : uuid
      * @return
      */
+    @Override
     public String[] get(long[] keys) {
         int nbKChunkKey = keys.length / 3;
         String[] toReturn = null;
@@ -107,5 +113,10 @@ public class LRUKeys {
             }
         }
         return toReturn;
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(_cache);
     }
 }
