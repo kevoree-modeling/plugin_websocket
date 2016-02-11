@@ -25,6 +25,8 @@ public class Array3LongIntMap implements K3LongIntMap {
     static final class Entry {
         Entry next; //linked list to mock the bucket
 
+        Entry brother;//entry with same uuid
+
         //key
         long universe;
         long time;
