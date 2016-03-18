@@ -1,18 +1,16 @@
-package org.kevoree.modeling.plugin.lru.impl;
+package org.kevoree.modeling.plugin.old.lru.impl;
 
 import org.kevoree.modeling.KConfig;
-import org.kevoree.modeling.plugin.lru.LRUCache;
-import org.kevoree.modeling.plugin.util.Array3LongIntMap;
-import org.kevoree.modeling.plugin.util.K3LongIntMap;
+import org.kevoree.modeling.plugin.old.lru.LRUCache;
+import org.kevoree.modeling.plugin.old.util.Array3LongIntMap;
+import org.kevoree.modeling.plugin.old.util.K3LongIntMap;
 
 import java.util.Arrays;
 
 /**
  * Created by ludovicmouline on 01/02/16.
  */
-public class LRUKeys implements LRUCache {
-
-    private int _capacity;
+public class LRUKeys implements LRUCache{
 
     private String[] _cache;
 
@@ -23,12 +21,12 @@ public class LRUKeys implements LRUCache {
     private K3LongIntMap _indexes;
 
     public LRUKeys(int capacity) {
-        _capacity = capacity;
+        int _capacity = capacity;
         _cache = new String[_capacity];
 
         _next = new int[_capacity];
         _prev = new int[_capacity];
-        for(int i = 0; i<_capacity;i++) {
+        for(int i = 0; i< _capacity; i++) {
             _next[i] = (i + 1) % _capacity;
             _prev[i] = ((i - 1) % _capacity + _capacity) % _capacity;
         }
@@ -69,7 +67,7 @@ public class LRUKeys implements LRUCache {
                _head = _next[_head];
            } else if(indexValue == _head) {//insert value that already exist and the head pointer is on this value
                _head = _next[_head];
-           } else {//insert value that already exist and the head pointer is NOT on this value => the LRU order changes
+           } else {//insert value that already exist and the head pointer is NOT on this value => the PageReplacement order changes
                _next[_prev[indexValue]] = _next[indexValue];
                _prev[_next[indexValue]] = _prev[indexValue];
                _next[indexValue] = _head;

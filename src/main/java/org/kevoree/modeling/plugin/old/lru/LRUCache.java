@@ -1,4 +1,4 @@
-package org.kevoree.modeling.plugin.lru;
+package org.kevoree.modeling.plugin.old.lru;
 
 /**
  * Created by ludovicmouline on 09/02/16.

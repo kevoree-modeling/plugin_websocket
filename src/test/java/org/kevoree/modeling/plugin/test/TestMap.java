@@ -1,16 +1,5 @@
 package org.kevoree.modeling.plugin.test;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.kevoree.modeling.plugin.util.Array3LongIntMap;
-import org.kevoree.modeling.plugin.util.K3LongIntMap;
-import org.kevoree.modeling.plugin.util.K3LongMapCallBack;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
 /**
  * Created by ludovicmouline on 09/02/16.
  */
@@ -18,7 +7,7 @@ public class TestMap {
     private static final int MAP_CAPACITY = 10;
     private static final float MAP_LOAD_FACTOR = 0.75f;
 
-    @Test
+   /* @Test
     public void simpleTestArray3LongIntMap() {
         K3LongIntMap map = new Array3LongIntMap(MAP_CAPACITY,MAP_LOAD_FACTOR);
 
@@ -77,5 +66,5 @@ public class TestMap {
                 Assert.assertEquals((long)keys.get(index * 3 + 2),uuid);
             }
         });
-    }
+    }*/
 }

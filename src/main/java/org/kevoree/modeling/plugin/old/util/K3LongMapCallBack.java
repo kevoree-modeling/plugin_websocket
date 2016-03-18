@@ -1,4 +1,4 @@
-package org.kevoree.modeling.plugin.util;
+package org.kevoree.modeling.plugin.old.util;
 
 /**
  * Created by ludovicmouline on 09/02/16.

@@ -1,4 +1,4 @@
-package org.kevoree.modeling.plugin.util;
+package org.kevoree.modeling.plugin.old.util;
 
 /* From an original idea https://code.google.com/p/jdbm2/
  *

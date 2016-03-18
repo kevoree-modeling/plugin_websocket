@@ -16,8 +16,8 @@ import org.kevoree.modeling.memory.chunk.impl.ArrayIntMap;
 import org.kevoree.modeling.memory.chunk.impl.ArrayLongMap;
 import org.kevoree.modeling.message.KMessage;
 import org.kevoree.modeling.message.impl.Message;
-import org.kevoree.modeling.plugin.lru.LRUCache;
-import org.kevoree.modeling.plugin.lru.impl.LRUKeys;
+import org.kevoree.modeling.plugin.old.lru.LRUCache;
+import org.kevoree.modeling.plugin.old.lru.impl.LRUKeys;
 import org.xnio.*;
 
 import java.io.IOException;

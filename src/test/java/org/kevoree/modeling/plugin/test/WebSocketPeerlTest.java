@@ -1,31 +1,10 @@
 package org.kevoree.modeling.plugin.test;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.kevoree.modeling.KCallback;
-import org.kevoree.modeling.KModel;
-import org.kevoree.modeling.KObject;
-import org.kevoree.modeling.KOperation;
-import org.kevoree.modeling.cdn.KContentDeliveryDriver;
-import org.kevoree.modeling.cdn.impl.MemoryContentDeliveryDriver;
-import org.kevoree.modeling.plugin.WebSocketClientPlugin;
-import org.kevoree.modeling.plugin.WebSocketGateway;
-import org.kevoree.modeling.memory.manager.DataManagerBuilder;
-import org.kevoree.modeling.meta.KMetaClass;
-import org.kevoree.modeling.meta.KMetaModel;
-import org.kevoree.modeling.meta.KMetaOperation;
-import org.kevoree.modeling.meta.KPrimitiveTypes;
-import org.kevoree.modeling.meta.impl.MetaModel;
-import org.kevoree.modeling.operation.OperationStrategies;
-
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-
 public class WebSocketPeerlTest {
 
     private static final int PORT = 9000;
 
-    @Test
+    /*@Test
     public void test() {
 
         KContentDeliveryDriver memoryDriver = new MemoryContentDeliveryDriver();
@@ -84,13 +63,13 @@ public class WebSocketPeerlTest {
               // sensorChild.set(dynamicSensorClass.attribute("value"), "52.52");
 
 
-                /*
+                *//*
                 sensorChild.invokeOperationByName("trigger", new Object[]{"SayHello"}, OperationStrategies.ONLY_ONE, new KCallback() {
                     @Override
                     public void on(Object o) {
                         
                     }
-                });*/
+                });*//*
 
 
                 long sensorUUID = sensor.uuid();
@@ -144,6 +123,6 @@ public class WebSocketPeerlTest {
         }
         Assert.assertEquals(latch.getCount(), 0);
         gateway.stop();
-    }
+    }*/
 
 }

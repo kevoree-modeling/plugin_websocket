@@ -1,7 +1,7 @@
-package org.kevoree.modeling.plugin.lru.impl;
+package org.kevoree.modeling.plugin.old.lru.impl;
 
 import org.kevoree.modeling.KConfig;
-import org.kevoree.modeling.plugin.lru.LRUCache;
+import org.kevoree.modeling.plugin.old.lru.LRUCache;
 
 /**
  * Created by ludovicmouline on 10/02/16.
@@ -14,7 +14,7 @@ public class LRUCache_OneMap implements LRUCache{
     private final float _loadFactor;
     private Entry[] _data;
 
-    //LRU structure
+    //PageReplacement structure
     private Entry _head; //the least recently used
 
 
@@ -31,7 +31,7 @@ public class LRUCache_OneMap implements LRUCache{
         //value
         String _value;
 
-        //Double linked list for LRU
+        //Double linked list for PageReplacement
         Entry _lruPrev;//younger value
         Entry _lruNext;//older value
 

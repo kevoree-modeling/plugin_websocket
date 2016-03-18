@@ -1,37 +1,11 @@
 package org.kevoree.modeling.plugin.test;
 
 
-import de.flapdoodle.embed.nodejs.*;
-import de.flapdoodle.embed.process.config.IRuntimeConfig;
-import org.junit.Assert;
-import org.junit.Test;
-import org.kevoree.modeling.KCallback;
-import org.kevoree.modeling.KModel;
-import org.kevoree.modeling.KObject;
-import org.kevoree.modeling.KOperation;
-import org.kevoree.modeling.cdn.KContentDeliveryDriver;
-import org.kevoree.modeling.cdn.impl.MemoryContentDeliveryDriver;
-import org.kevoree.modeling.plugin.WebSocketClientPlugin;
-import org.kevoree.modeling.plugin.WebSocketGateway;
-import org.kevoree.modeling.memory.manager.DataManagerBuilder;
-import org.kevoree.modeling.meta.KMetaClass;
-import org.kevoree.modeling.meta.KMetaModel;
-import org.kevoree.modeling.meta.KMetaOperation;
-import org.kevoree.modeling.meta.KPrimitiveTypes;
-import org.kevoree.modeling.meta.impl.MetaModel;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-
 public class IsomorphicTest {
 
     private static final int PORT = 9000;
 
-    @Test
+   /* @Test
     public void nodeJS() throws Exception {
 
         KContentDeliveryDriver memoryDriver = new MemoryContentDeliveryDriver();
@@ -93,12 +67,12 @@ public class IsomorphicTest {
 
     private int launchRunner(String file) {
 
-        /*
+        *//*
         try {
             Thread.sleep(1000000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }*//*
 
 
         if (testNativeNode()) {
@@ -111,7 +85,7 @@ public class IsomorphicTest {
                 }
                 String basePath = IsomorphicTest.class.getClassLoader().getResource(file).getFile().replaceAll("%20", " ");
 
-                /*
+                *//*
                 System.out.println("NPM install in " + new File(basePath.toString().substring(0, basePath.toString().lastIndexOf("/"))).getAbsolutePath());
                 String[] params_npm = new String[3];
                 params_npm[0] = "npm";
@@ -122,7 +96,7 @@ public class IsomorphicTest {
                 pbNPM.redirectError();
                 pbNPM.redirectOutput();
                 int resNPM = pbNPM.start().waitFor();
-                */
+                *//*
 
                 params[1] = basePath;
                 ProcessBuilder pb = new ProcessBuilder(params);
@@ -202,6 +176,6 @@ public class IsomorphicTest {
         } else {
             return OSType.Other;
         }
-    }
+    }*/
 
 }
